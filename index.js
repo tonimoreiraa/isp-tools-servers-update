@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const url = 'http://www.isp.tools/ping';
+const outputPath = process.env.OUTPUT_PATH || 'servers.json';
 
 async function fetchPageAndExtractServers() {
     try {
@@ -69,7 +70,7 @@ async function fetchPageAndExtractServers() {
 
             const formattedJson = JSON.stringify(transformedJson, null, 2);
             
-            fs.writeFileSync('servers.json', formattedJson, 'utf8');
+            fs.writeFileSync(OUTPUT_PATH, formattedJson, 'utf8');
             console.log('Arquivo servers.json criado com sucesso!');
             console.log('Conteúdo extraído e formatado:');
             console.log(transformedJson);
@@ -77,10 +78,6 @@ async function fetchPageAndExtractServers() {
         } catch (parseError) {
             console.error('Erro ao parsear JSON:', parseError.message);
             console.log('Conteúdo bruto extraído:', jsonContent);
-            
-            // Salva o conteúdo bruto mesmo se não for JSON válido
-            fs.writeFileSync('servers.json', jsonContent, 'utf8');
-            console.log('Conteúdo bruto salvo em servers.json');
         }
         
     } catch (error) {
