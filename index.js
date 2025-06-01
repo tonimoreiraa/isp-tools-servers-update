@@ -70,7 +70,7 @@ async function fetchPageAndExtractServers() {
 
             const formattedJson = JSON.stringify(transformedJson, null, 2);
             
-            fs.writeFileSync(OUTPUT_PATH, formattedJson, 'utf8');
+            fs.writeFileSync(outputPath, formattedJson, 'utf8');
             console.log('Arquivo servers.json criado com sucesso!');
             console.log('Conteúdo extraído e formatado:');
             console.log(transformedJson);
