@@ -63,7 +63,7 @@ async function fetchPageAndExtractServers() {
             
             // Salva no arquivo servers.json com formatação
             const transformedJson = parsedJson.map(line => ({
-                id: line[0],
+                id: Number(line[0]),
                 name: line[1],
                 address: line[2],
             }))
