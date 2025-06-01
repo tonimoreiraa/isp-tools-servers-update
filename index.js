@@ -61,12 +61,18 @@ async function fetchPageAndExtractServers() {
             const parsedJson = JSON.parse(jsonContent);
             
             // Salva no arquivo servers.json com formatação
-            const formattedJson = JSON.stringify(parsedJson, null, 2);
+            const transformedJson = parsedJson.map(line => ({
+                id: line[0],
+                name: line[1],
+                address: line[2],
+            }))
+
+            const formattedJson = JSON.stringify(transformedJson, null, 2);
             
             fs.writeFileSync('servers.json', formattedJson, 'utf8');
             console.log('Arquivo servers.json criado com sucesso!');
             console.log('Conteúdo extraído e formatado:');
-            console.log(formattedJson);
+            console.log(transformedJson);
             
         } catch (parseError) {
             console.error('Erro ao parsear JSON:', parseError.message);
